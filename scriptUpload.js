@@ -52,7 +52,7 @@ function uploadFile() {
 
   const data = {
     autoencoding: true,
-    name: `kit/${filename}`,
+    name: `kit/${filename}/${filename}`,
     presets: '5676a27cf9cb101634000002,5676a27cf9cb101634000003,5676a27cf9cb101634000004,5676a27cf9cb101634000006', //1080,720,480,360
     del_original: true,
     autoplayer: true

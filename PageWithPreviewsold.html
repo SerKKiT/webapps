@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Player</title>
+  <style>
+    @font-face {
+         font-family: "Centro Sans Pro";
+         src: url(fonts/PFCentroSansPro-MediumItalic.woff2) format("woff2"),
+              url(fonts/PFCentroSansPro-MediumItalic.woff) format("woff");
+    }
+    #video-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Update to three columns */
+  grid-gap: 20px;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  text-align: center;
+}
+
+.video-preview {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.video-name {
+  margin-top: 10px;
+  font-family: "Centro Sans Pro", Arial, sans-serif; /* Set the font to Arial */
+}
+
+  </style>
+  
+</head>
+<body>
+  <div id="video-container" class="video-container">
+    <!-- Video previews will be dynamically added here -->
+  </div>
+  
+
+  <script src="scriptPreviewPage.js"></script>
+  
+</body>
+</html>
