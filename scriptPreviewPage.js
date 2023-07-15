@@ -34,6 +34,7 @@ function updatePreviews() {
         img.src = newLinks[i];
         img.className = 'video-preview';
         img.alt = 'Video Preview';
+        img.style.cursor = 'pointer'; // Set the cursor style to pointer
         img.onclick = function() {
           openNewPage(newVids[i], names[i]);
         };
@@ -42,6 +43,16 @@ function updatePreviews() {
         const nameElement = document.createElement('p');
         nameElement.textContent = getVideoName(names[i]);
         nameElement.className = 'video-name';
+        nameElement.style.cursor = 'pointer'; // Set the cursor style to pointer
+        nameElement.onclick = function() {
+          openNewPage(newVids[i], names[i]);
+        };
+        nameElement.onmouseover = function() {
+          nameElement.style.textDecoration = 'underline'; // Add underline when hovered over
+        };
+        nameElement.onmouseout = function() {
+          nameElement.style.textDecoration = 'none'; // Remove underline when not hovered over
+        };
         videoWrapper.appendChild(nameElement);
 
         videoContainer.appendChild(videoWrapper);
