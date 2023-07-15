@@ -9,10 +9,13 @@ var firebaseConfig = {
   databaseURL: "https://chatweb-6dcad-default-rtdb.firebaseio.com/",
 };
 firebase.initializeApp(firebaseConfig);
+// Get the chat ID from the URL
+var videoName = window.location.href.split('?')[1]; // Extract the videoName from the URL
+var sanitizedVideoName = videoName.replace(/[.#$[\]/]/g, "-"); // Remove invalid characters from videoName
+var chatId = encodeURIComponent(sanitizedVideoName); // Encode the sanitized videoName as the chatId
 
-// Get a reference to the database
-var database = firebase.database().ref("chat");
-
+// Get a reference to the database for the specific chat ID
+var database = firebase.database().ref("chats/" + chatId);
 // Function to send a message
 function sendMessage(event) {
   if (event.type === "click" || event.key === "Enter") {
@@ -68,7 +71,7 @@ function displayMessage(message) {
 
 
 
-// Listen for new messages
+// Listen for new messages in the specific chat
 database.on("child_added", function(snapshot) {
   var message = snapshot.val();
   displayMessage(message);
