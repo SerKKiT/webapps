@@ -7,7 +7,7 @@ let videoPlayers = []; // keep track of video players
 
 function updateStreams() {
   if (!accessToken) return; // if accessToken is null, return and do nothing
-  fetch('https://filespot.platformcraft.ru/2/fs/container/60b080470e47cf6763e5ae85/object/kit',{
+  fetch('https://filespot.platformcraft.ru/2/fs/container/60b080470e47cf6763e5ae85/object/kit/streams',{
     method: 'GET',
     headers: new Headers({
       'Authorization': 'Bearer ' + accessToken
@@ -72,7 +72,7 @@ function updateStreams() {
           }
         }
       }
-      console.log("Privet");
+      
     });
 }
 

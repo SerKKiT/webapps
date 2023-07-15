@@ -53,75 +53,18 @@ function getVideoName(name) {
   return name.split('.')[0]; // Get the part before the dot (file extension)
 }
 
+function openNewPage(videoUrl, name) {
+  // Encode the video URL and name to ensure they are properly formatted for the URL
+  var encodedVideoUrl = encodeURIComponent(videoUrl);
+  var encodedName = encodeURIComponent(getVideoName(name));
 
-  
- // Function to open a new page with the video
-// Function to open a new page with the video
-function openNewPage(cdnUrl, name) {
-  const newPage = window.open('', '_blank');
+  // Construct the URL with the query parameters
+  var url = "temppage.html?videoUrl=" + encodedVideoUrl + "&name=" + encodedName;
 
-  const newPageContent = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>${getVideoName(name)}</title>
-        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
-        <link rel="stylesheet" href="chatstyles.css">
-        <link rel="stylesheet" href="videopage_header_style.css">
-      </head>
-      <body>
-      <header>
-      <a href="PageWithPreviews.html" class="header-link">
-        <div class="logo">
-          <img src="logo.png" alt="Logo">
-        </div>
-      </a>
-    </header>
-
-        <div id="container">
-          <div id="videoContainer">
-            <div class="video-container">
-              <iframe src="https://${cdnUrl}" width="1280" height="720" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div id="videoName">${getVideoName(name)}</div>
-          </div>
-
-          <div id="chatContainer">
-            <div id="chat"></div>
-            <div id="inputContainer">
-              <input type="text" id="usernameInput" placeholder="Your username">
-              <input type="text" id="messageInput" placeholder="Type your message" onkeydown="sendMessage(event)" onkeyup="sendMessage(event)">
-            </div>
-            <div id="buttonContainer">
-              <button onclick="sendMessagebutton()">Send</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add the script tag for the external JavaScript file -->
-        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
-        <script src="chat.js"></script>
-        <script src="https://vjs.zencdn.net/7.11.4/video.js"></script>
-      </body>
-    </html>
-  `;
-
-  newPage.document.open();
-  newPage.document.write(newPageContent);
-  newPage.document.close();
+  // Navigate to the new page with the URL
+  window.location.href = url;
 }
 
-
-
-
-
-
-
-
-
-
-   
 
 function getAccessToken() {
   var xhr = new XMLHttpRequest();
