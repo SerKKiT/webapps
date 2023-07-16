@@ -34,31 +34,51 @@ function updatePreviews() {
         img.src = newLinks[i];
         img.className = 'video-preview';
         img.alt = 'Video Preview';
-        img.style.cursor = 'pointer'; // Set the cursor style to pointer
-        img.onclick = function() {
-          openNewPage(newVids[i], names[i]);
-        };
-        videoWrapper.appendChild(img);
+        img.style.cursor = 'pointer';
 
         const nameElement = document.createElement('p');
         nameElement.textContent = getVideoName(names[i]);
         nameElement.className = 'video-name';
-        nameElement.style.cursor = 'pointer'; // Set the cursor style to pointer
-        nameElement.onclick = function() {
-          openNewPage(newVids[i], names[i]);
-        };
-        nameElement.onmouseover = function() {
-          nameElement.style.textDecoration = 'underline'; // Add underline when hovered over
-        };
-        nameElement.onmouseout = function() {
-          nameElement.style.textDecoration = 'none'; // Remove underline when not hovered over
-        };
+        nameElement.style.cursor = 'pointer';
+
+        const frameElement = document.createElement('div');
+        frameElement.className = 'video-frame';
+        frameElement.style.display = 'none'; // Initially hide the frame
+
+        videoWrapper.appendChild(img);
         videoWrapper.appendChild(nameElement);
+        videoWrapper.appendChild(frameElement);
+
+        const showFrameAndUnderline = function() {
+          img.style.border = '2px solid rgb(20, 5, 160)'; // Show frame around preview
+          nameElement.style.textDecoration = 'underline'; // Underline the name
+        };
+
+        const hideFrameAndUnderline = function() {
+          img.style.border = 'none'; // Hide frame around preview
+          nameElement.style.textDecoration = 'none'; // Remove underline from the name
+        };
+
+        img.addEventListener('mouseover', showFrameAndUnderline);
+        img.addEventListener('mouseout', hideFrameAndUnderline);
+        nameElement.addEventListener('mouseover', showFrameAndUnderline);
+        nameElement.addEventListener('mouseout', hideFrameAndUnderline);
+
+        img.addEventListener('click', function() {
+          openNewPage(newVids[i], names[i]);
+        });
+
+        nameElement.addEventListener('click', function() {
+          openNewPage(newVids[i], names[i]);
+        });
 
         videoContainer.appendChild(videoWrapper);
       }
     });
 }
+
+
+
 
 function getVideoName(name) {
   return name.split('.')[0]; // Get the part before the dot (file extension)
