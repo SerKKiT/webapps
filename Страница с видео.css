@@ -112,3 +112,23 @@
   }.u-section-2 .u-sheet-1 {
     min-height: 60px;
   }
+  .video-preview {
+    border: none;
+  }
+  
+  .video-preview:hover {
+    border: 2px solid rgb(20, 5, 160); /* Add a red border when hovered over */
+  }
+
+  .video-name {
+    text-decoration: none;
+  }
+  
+  .video-name:hover {
+    text-decoration: underline; /* Add the underline when hovered over */
+  }
+  .video-frame {
+    display: none;
+    /* Add other styling properties as desired */
+  }
+  
