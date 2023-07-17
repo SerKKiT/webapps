@@ -154,13 +154,13 @@ font-family: "Centro Sans Pro", Arial, sans-serif;
   height: 90%;
 }
 
-#videoName {
+#video-name {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: #ffffff;
-  font-size: 30px;
-  font-family: "PFCentroSansPro-MediumItalic", Arial, sans-serif;
+    bottom: 10px;
+    left: 10px;
+    color: #ffffff;
+    font-size: 30px;
+    font-family: "PFCentroSansPro-MediumItalic", Arial, sans-serif;
 }
 
 

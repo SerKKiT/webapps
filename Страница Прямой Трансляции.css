@@ -124,8 +124,12 @@
     align-items: center;
   }
   .video-name {
-    text-align: center; /* Center the text */
-    /* Add other styling properties as desired */
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #ffffff;
+    font-size: 30px;
+    font-family: "PFCentroSansPro-MediumItalic", Arial, sans-serif;
   }
   
   body {
