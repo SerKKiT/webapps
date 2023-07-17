@@ -110,3 +110,21 @@
 }.u-section-2 .u-sheet-1 {
   min-height: 171px;
 }
+
+.video-preview {
+  width: 640px; /* Set a fixed width */
+  height: 360px; /* Set a fixed height */
+  /* Add other styling properties as desired */
+}
+#video-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+  gap: 20px; /* Add some space between the columns */
+  justify-content: center;
+  align-items: center;
+}
+.video-name {
+  text-align: center; /* Center the text */
+  /* Add other styling properties as desired */
+}
+

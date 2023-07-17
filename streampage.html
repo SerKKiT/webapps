@@ -6,13 +6,14 @@
   <meta name="description" content="">
   <title>Прямые Трансляции</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="Страница с видео.css" media="screen">
-  <link rel="stylesheet" href="chatstyles.css">
+  <link rel="stylesheet" href="Страница Прямой Трансляции.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 5.13.1, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-  
+  <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
+  <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
+
   
   
   <script type="application/ld+json">{
@@ -72,9 +73,10 @@
             <div class="u-container-layout u-container-layout-1">
               <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-2">
                 <div id="videoContainer">
-                  <iframe id="videoPlayer" width="1280" height="720" frameborder="0" allowfullscreen=""></iframe>
-                  <div id="videoName"></div>
-                </div>
+                    <video id="videoPlayer" class="video-js vjs-default-skin vjs-big-play-centered" controls></video>
+                    <div id="videoName"></div>
+                  </div>
+                  
                 
               </div>
             </div>
@@ -115,8 +117,17 @@
     var name = urlParams.get("name");
 
     // Set the video URL and name
-    var videoPlayer = document.getElementById("videoPlayer");
-    videoPlayer.src = "https://"+videoUrl;
+    var videoPlayer = videojs('videoPlayer', {
+    controls: true,
+    autoplay: false,
+    preload: 'auto',
+    muted: true
+  });
+
+  videoPlayer.src({
+    src: "https://"+videoUrl,
+    type: 'application/x-mpegURL'
+  });
     videoPlayer.title = name;
     document.getElementById("videoName").innerText = name;
     document.title = name;

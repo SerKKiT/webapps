@@ -4,15 +4,30 @@
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Видео по запросу</title>
+    <title>Прямые Трансляции</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="PageWithPreviews_styles.css" media="screen">
+    <link rel="stylesheet" href="Прямые-Трансляции.css" media="screen">
+<style> 
+  #video-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin-top: 50px; /* Add margin at the top of the video container */
+  }
+  .video-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  </style>
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 5.13.1, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
     
+    <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -46,7 +61,7 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Главная.html">Главная</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html">Главная</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Streams.html">Прямые Трансляции</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="PageWithPreviews.html">Видео по Запросу</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Admin.html">Загрузчик видео</a>
@@ -60,15 +75,17 @@
     <section class="u-clearfix u-palette-5-dark-3 u-section-1" id="sec-7005">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
-          <div id="video-container" class="video-container"><!-- Video previews will be dynamically added here --></div>
-          <script src="scriptPreviewPage.js"></script>
+          <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
+          
+          
+          <div id="video-container"></div>
+          <script src="videojs-hls-streams.js"></script>
+          <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
         </div>
       </div>
     </section>
     <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="sec-9e37">
-        <div class="u-clearfix u-sheet u-sheet-1"></div>
-      </section>
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
     
-    
-  
 </body></html>

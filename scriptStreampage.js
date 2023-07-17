@@ -3,35 +3,33 @@ let accessToken = null;
 let currentLinks = [];
 
 function updatePreviews() {
-  if (!accessToken) return;
-  fetch('https://api.platformcraft.ru/1/players', {
-    method: 'GET',
-    headers: new Headers({
-      'Authorization': 'Bearer ' + accessToken
+    if (!accessToken) return;
+    fetch('https://filespot.platformcraft.ru/2/fs/container/60b080470e47cf6763e5ae85/object/kit/streams', {
+      method: 'GET',
+      headers: new Headers({
+        'Authorization': 'Bearer ' + accessToken
+      })
     })
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (!data.players || data.players.length === 0) {
-        const videoContainer = document.getElementById('video-container');
-        videoContainer.innerHTML = 'Нет доступных видео.';
-        return;
-      }
-
-      
-      const newLinks = data.players.map(video => {
-        if (video.screen_shot_url) {
-          return 'https://' + video.screen_shot_url;
-        } else {
-          return 'prevpic.png'; // Replace with your static picture URL
+      .then(response => response.json())
+      .then(data => {
+        if (!data.contents || data.contents.length === 0) {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML = '<img src="https://i.pinimg.com/originals/b9/eb/53/b9eb53ce715ec8b2035e225a83b85547.gif" alt="No live translations available">';
+            return;
         }
-      });
-      const newVids =  data.players.map(link => (link.href));
-      //const contentTypes = data.players.map(video => video.content_type);
-      const names = data.players.map(video => video.name); // Get the names
-
-      const videoContainer = document.getElementById('video-container');
-      videoContainer.innerHTML = ''; // Clear existing video preview elements
+  
+        const newLinks = data.contents.map(video => {
+          if (video.preview_url) {
+            return 'https://' + video.preview_url;
+          } else {
+            return 'static/prevpic.png'; // Replace with your static picture URL
+          }
+        });
+        const newVids =  data.contents.map(link => (link.download_url));
+        const names = data.contents.map(video => video.name);
+  
+        const videoContainer = document.getElementById('video-container');
+        videoContainer.innerHTML = '';
 
       for (let i = 0; i < newLinks.length; i++) {
         const videoWrapper = document.createElement('div');
@@ -97,7 +95,7 @@ function openNewPage(videoUrl, name) {
   var encodedName = encodeURIComponent(getVideoName(name));
 
   // Construct the URL with the query parameters
-  var url = "temppage.html?videoUrl=" + encodedVideoUrl + "&name=" + encodedName;
+  var url = "streampage.html?videoUrl=" + encodedVideoUrl + "&name=" + encodedName;
 
   // Navigate to the new page with the URL
   window.location.href = url;
