@@ -42,7 +42,7 @@ function updatePreviews() {
         img.style.cursor = 'pointer';
 
         const nameElement = document.createElement('p');
-        nameElement.textContent = getVideoName(names[i]);
+        nameElement.textContent = getShortName(names[i]);
         nameElement.className = 'video-name';
         nameElement.style.cursor = 'pointer';
 
@@ -87,6 +87,14 @@ function updatePreviews() {
 
 function getVideoName(name) {
   return name.split('.')[0]; // Get the part before the dot (file extension)
+}
+
+function getShortName(name) {
+  let trimmedName = name.split('.')[0]; // Get the part before the dot (file extension)
+  if (trimmedName.length > 36) {
+    trimmedName = trimmedName.substring(0, 36) + '...'; // Cut the name and add ellipsis
+  }
+  return trimmedName;
 }
 
 function openNewPage(videoUrl, name) {

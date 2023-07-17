@@ -4,6 +4,8 @@
 
 .u-section-1 .u-custom-html-1 {
   margin-bottom: 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .u-section-1 .u-layout-wrap-1 {
@@ -112,13 +114,13 @@
 }
 
 .video-preview {
-  width: 640px; /* Set a fixed width */
-  height: 360px; /* Set a fixed height */
+  width: 100%; /* Set a fixed width */
+  height: auto; /* Set a fixed height */
   /* Add other styling properties as desired */
 }
 #video-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Create flexible columns */
   gap: 20px; /* Add some space between the columns */
   justify-content: center;
   align-items: center;
