@@ -4,7 +4,7 @@ let currentLinks = [];
 
 function updatePreviews() {
   if (!accessToken) return;
-  fetch('https://filespot.platformcraft.ru/2/fs/container/60b080470e47cf6763e5ae85/object/kit', {
+  fetch('https://api.platformcraft.ru/1/players', {
     method: 'GET',
     headers: new Headers({
       'Authorization': 'Bearer ' + accessToken
@@ -12,16 +12,23 @@ function updatePreviews() {
   })
     .then(response => response.json())
     .then(data => {
-      const newLinks = data.contents.map(video => {
-        if (video.preview_url) {
-          return 'https://' + video.preview_url;
+      if (!data.players || data.players.length === 0) {
+        const videoContainer = document.getElementById('video-container');
+        videoContainer.innerHTML = 'Нет доступных видео.';
+        return;
+      }
+
+      
+      const newLinks = data.players.map(video => {
+        if (video.screen_shot_url) {
+          return 'https://' + video.screen_shot_url;
         } else {
           return 'prevpic.png'; // Replace with your static picture URL
         }
       });
-      const newVids =  data.contents.map(link => ('https://' + link.download_url));
-      const contentTypes = data.contents.map(video => video.content_type);
-      const names = data.contents.map(video => video.name); // Get the names
+      const newVids =  data.players.map(link => (link.href));
+      //const contentTypes = data.players.map(video => video.content_type);
+      const names = data.players.map(video => video.name); // Get the names
 
       const videoContainer = document.getElementById('video-container');
       videoContainer.innerHTML = ''; // Clear existing video preview elements
@@ -34,81 +41,76 @@ function updatePreviews() {
         img.src = newLinks[i];
         img.className = 'video-preview';
         img.alt = 'Video Preview';
-        img.onclick = function() {
-          openNewPage(newVids[i], contentTypes[i], names[i]);
-        };
-        videoWrapper.appendChild(img);
+        img.style.cursor = 'pointer';
 
         const nameElement = document.createElement('p');
-        nameElement.textContent = getVideoName(names[i]);
+        nameElement.textContent = getShortName(names[i]);
         nameElement.className = 'video-name';
+        nameElement.style.cursor = 'pointer';
+
+        const frameElement = document.createElement('div');
+        frameElement.className = 'video-frame';
+        frameElement.style.display = 'none'; // Initially hide the frame
+
+        videoWrapper.appendChild(img);
         videoWrapper.appendChild(nameElement);
+        videoWrapper.appendChild(frameElement);
+
+        const showFrameAndUnderline = function() {
+          img.style.border = '2px solid rgb(20, 5, 160)'; // Show frame around preview
+          nameElement.style.textDecoration = 'underline'; // Underline the name
+        };
+
+        const hideFrameAndUnderline = function() {
+          img.style.border = 'none'; // Hide frame around preview
+          nameElement.style.textDecoration = 'none'; // Remove underline from the name
+        };
+
+        img.addEventListener('mouseover', showFrameAndUnderline);
+        img.addEventListener('mouseout', hideFrameAndUnderline);
+        nameElement.addEventListener('mouseover', showFrameAndUnderline);
+        nameElement.addEventListener('mouseout', hideFrameAndUnderline);
+
+        img.addEventListener('click', function() {
+          openNewPage(newVids[i], names[i]);
+        });
+
+        nameElement.addEventListener('click', function() {
+          openNewPage(newVids[i], names[i]);
+        });
 
         videoContainer.appendChild(videoWrapper);
       }
     });
 }
 
+
+
+
 function getVideoName(name) {
   return name.split('.')[0]; // Get the part before the dot (file extension)
 }
 
-
-  
- // Function to open a new page with the video
-// Function to open a new page with the video
-function openNewPage(link, type, name) {
-  const newPage = window.open('', '_blank');
-
-  const newPageContent = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>${getVideoName(name)}</title>
-        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
-      
-        <style>
-      
-        body {
-          background-color: #f0f0f0;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-        }
-
-        .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        }
-
-        .video-player {
-          max-width: 800px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        </style>
-      </head>
-      <body>
-        <video id="videoPlayer" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="640" height="480" muted>
-          <source src="${link}" type="${type}">
-        </video>
-        <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
-        <script>
-          const videoPlayer = videojs('videoPlayer');
-        </script>
-      </body>
-    </html>
-  `;
-
-  newPage.document.open();
-  newPage.document.write(newPageContent);
-  newPage.document.close();
+function getShortName(name) {
+  let trimmedName = name.split('.')[0]; // Get the part before the dot (file extension)
+  if (trimmedName.length > 36) {
+    trimmedName = trimmedName.substring(0, 36) + '...'; // Cut the name and add ellipsis
+  }
+  return trimmedName;
 }
-   
+
+function openNewPage(videoUrl, name) {
+  // Encode the video URL and name to ensure they are properly formatted for the URL
+  var encodedVideoUrl = encodeURIComponent(videoUrl);
+  var encodedName = encodeURIComponent(getVideoName(name));
+
+  // Construct the URL with the query parameters
+  var url = "temppage.html?videoUrl=" + encodedVideoUrl + "&name=" + encodedName;
+
+  // Navigate to the new page with the URL
+  window.location.href = url;
+}
+
 
 function getAccessToken() {
   var xhr = new XMLHttpRequest();

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru"><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <title>Прямые Трансляции</title>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="Страница с видео.css" media="screen">
+  <link rel="stylesheet" href="chatstyles.css">
+  <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+
+  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
+<script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
+
+
+
+  <script src="scriptVideopage.js"></script>
+  <script src="chat.js"></script>
+  <meta name="generator" content="Nicepage 5.13.1, nicepage.com">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  
+  
+  
+  <script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "logo": "static/logo.png"
+}</script>
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="Прямые Трансляции">
+  <meta property="og:type" content="website">
+<meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+<body class="u-body u-xl-mode" data-lang="ru"><header class="u-clearfix u-header u-palette-5-dark-3 u-header" id="sec-dea9"><div class="u-clearfix u-sheet u-sheet-1">
+      <a href="index.html" class="u-image u-logo u-image-1" data-image-width="2933" data-image-height="592">
+        <img src="static/logo.png" class="u-logo-image u-logo-image-1">
+      </a>
+      <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+        <div class="menu-collapse">
+          <a class="u-button-style u-nav-link" href="#">
+            <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-50fc"></use></svg>
+            <svg class="u-svg-content" version="1.1" id="svg-50fc" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+          </a>
+        </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-unstyled"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html">Главная</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Streams.html">Прямые Трансляции</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="PageWithPreviews.html">Видео по Запросу</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Admin.html">Загрузчик видео</a>
+</li></ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.html">Главная</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Streams.html">Прямые Трансляции</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="PageWithPreviews.html">Видео по Запросу</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Admin.html">Загрузчик видео</a>
+</li></ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+      </nav>
+    </div></header>
+  <section class="u-clearfix u-palette-5-dark-3 u-section-1" id="sec-7005">
+    <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
+      
+      
+    
+    </div>
+    <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+      <div class="u-layout">
+        <div class="u-layout-row">
+          <div class="u-container-style u-layout-cell u-size-41 u-layout-cell-1">
+            <div class="u-container-layout u-container-layout-1">
+              <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-2">
+                <div id="videoContainer">
+                    <video id="videoPlayer" class="video-js vjs-default-skin vjs-big-play-centered vjs-control" controls></video>
+                     
+                    <div id="videoName"></div>
+                 
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="u-container-style u-layout-cell u-size-19 u-layout-cell-2">
+            <div class="u-container-layout u-container-layout-2">
+              <div class="u-clearfix u-custom-html u-custom-html-3">
+                <div id="chat"></div>
+                <div id="inputContainer">
+                  <input type="text" id="usernameInput" placeholder="Your username">
+                  <input type="text" id="messageInput" placeholder="Type your message" onkeydown="sendMessage(event)" onkeyup="sendMessage(event)">
+                </div>
+                <div id="buttonContainer">
+                  <button onclick="sendMessagebutton()">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="u-clearfix u-palette-5-dark-3 u-section-2" id="sec-9e37">
+    <div class="u-clearfix u-sheet u-sheet-1"></div>
+  </section>
+
+  
+ 
+
+  
+</body>
+</html>

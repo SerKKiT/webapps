@@ -26,7 +26,7 @@ function updatePreviews() {
           return 'prevpic.png'; // Replace with your static picture URL
         }
       });
-      const newVids =  data.players.map(link => (link.href));
+      const newVids =  data.players.map(link => (link.id));
       //const contentTypes = data.players.map(video => video.content_type);
       const names = data.players.map(video => video.name); // Get the names
 
@@ -99,13 +99,13 @@ function getShortName(name) {
   return trimmedName;
 }
 
-function openNewPage(videoUrl, name) {
+function openNewPage(videoID, name) {
   // Encode the video URL and name to ensure they are properly formatted for the URL
-  var encodedVideoUrl = encodeURIComponent(videoUrl);
+  var encodedvideoID = encodeURIComponent(videoID);
   var encodedName = encodeURIComponent(getVideoName(name));
 
   // Construct the URL with the query parameters
-  var url = "temppage.html?videoUrl=" + encodedVideoUrl + "&name=" + encodedName;
+  var url = "VODpage.html?videoID=" + encodedvideoID + "&name=" + encodedName;
 
   // Navigate to the new page with the URL
   window.location.href = url;
