@@ -4,7 +4,7 @@ let currentLinks = [];
 
 function updatePreviews() {
   if (!accessToken) return;
-  fetch('https://api.platformcraft.ru/1/players', {
+  fetch('https://api.platformcraft.ru/1/players?name=future', {
     method: 'GET',
     headers: new Headers({
       'Authorization': 'Bearer ' + accessToken
@@ -27,6 +27,7 @@ function updatePreviews() {
         }
       });
       const newVids =  data.players.map(link => (link.id));
+      console.log(newVids);
       //const contentTypes = data.players.map(video => video.content_type);
       const names = data.players.map(video => video.name); // Get the names
 

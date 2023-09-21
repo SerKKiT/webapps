@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "videojs-qualityselector": "^0.0.4"
+    "videojs-qualityselector": "^0.0.4",
+    "videojs-resolution-selector": "^1.6.2"
+  },
+  "devDependencies": {
+    "video.js": "^8.3.0"
   }
 }

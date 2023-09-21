@@ -129,29 +129,3 @@ function getAccessToken() {
 getAccessToken();
 setInterval(getAccessToken, 86400000);
 setInterval(updatePreviews, 10000);
-
-
-
-
-player.qualityselector({
-  sources: [
-    { format: 'hd1080', src: sources[0], type: 'video/mp4'},
-    { format: 'hd720', src: sources[3], type: 'video/mp4'},
-    { format: '480', src: sources[2], type: 'video/mp4'},
-    { format: '360', src: sources[1], type: 'video/mp4'},
-   
-    { format: 'auto', src: sources[0], type: 'video/mp4'}
-  ],
-  formats: [
-   
-    { code: 'hd1080', name: '1080p' },
-    { code: 'hd720', name: '720p' },
-    { code: '480', name: '480p' },
-    { code: '360', name: '360p' },
-    { code: 'auto', name: 'Auto' }
-  ],
-
-  onFormatSelected: function(format) {
-    console.log(format);
-  }
-});

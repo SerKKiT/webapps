@@ -29,16 +29,37 @@ function updatePreviews() {
         console.log(videos);
   
         // Create an array of video sources
-        const sources = videos.map(videoUrl => {
+        const links = videos.map(videoUrl => {
           return {
             src: "https://"+videoUrl,
-            type: 'video/mp4' // Adjust the type as per your video format
           };
         });
   
         // Initialize Video.js player
-        const player = videojs('videoPlayer');
-        player.src(sources);
+        var player = videojs('videoPlayer',{
+          'html5': {
+              nativeTextTracks: false,
+              nativeAudioTracks: false,
+              nativeVideoTracks: false,
+              hls: {
+                overrideNative: true,
+              }
+          },
+          
+      });
+
+        player.videoJsResolutionSwitcher({
+          default: '1080p',
+          dynamicLabel: true,
+      });
+      
+        var sources =  [
+          { src: links[1].src, type: "video/mp4", label: "360p" },
+          { src: links[2].src, type: "video/mp4", label: "480p" },
+          { src: links[3].src, type: "video/mp4", label: "720p" },
+          { src: links[0].src, type: "video/mp4", label: "1080p" }
+        ]
+        player.updateSrc(sources);
 
         //Update the name element
       const nameElement = document.getElementById('videoName');
@@ -72,4 +93,3 @@ function getAccessToken() {
 
 getAccessToken();
 setInterval(getAccessToken, 86400000);
-
